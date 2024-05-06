@@ -1,9 +1,71 @@
-*{
+/* Grundlegende Einstellungen */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
-    background-color: blueviolet;
+body {
+    font-family: "Inter-Regular", Helvetica, sans-serif;
+    background-color: #333; /* Dunkler Hintergrund für das gesamte Design */
+    color: #fff; /* Weiße Textfarbe für besseren Kontrast */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Zentrieren der Inhalte */
 }
+
+nav {
+    width: 100%;
+    background-color: #000; /* Dunkle Navigationsleiste */
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+#weatherBlock {
+    width: 100%;
+    background-color: #222; /* Dunkler Hintergrund für Wetterblock */
+    padding: 20px;
+    text-align: center;
+}
+
+#cocktailBlock {
+    width: 100%;
+    height: 75vh; /* Vollständige Höhe des Bildschirms */
+    background-size: cover;
+    background-position: center -2cm; /* Verschiebt das Bild nach unten */
+    position: relative;
+}
+
+
+#cocktailImage {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund für den Titel */
+}
+
+#cocktailTitle {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#cocktailRecipe {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Halbtransparenter Hintergrund für das Rezept */
+    margin-top: 250px; /* Abstand entsprechend der Höhe des Cocktailbildes */
+}
+
