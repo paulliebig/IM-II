@@ -7,36 +7,40 @@
 </head>
 
 <body>
-    <nav>
-        <!-- Navigationslinks -->
-    </nav>
 
-    <div id="weatherBlock">
-        <h1>Aktuelles Wetter in Bern</h1>
-        <div id="weatherData"></div>
+    <div id="weatherContainer">
+        <div class="weather-column" id="weatherIconContainer">
+            <img id="weatherIcon" src="" alt="Wetter-Icon" style="width: 160px; height: 160px;">
+        </div>
+        <div class="weather-column" id="weatherData">
+            <!-- Wetterdaten werden hier durch JavaScript eingefügt -->
+        </div>
+        <div class="weather-column">
+            <label for="citySelect" class="city-select-label">Wähle eine Stadt:</label>
+            <select id="citySelect">
+                <option value="https://api.open-meteo.com/v1/forecast?latitude=46.948&longitude=7.447&current=temperature_2m,rain,snowfall,cloud_cover">Bern</option>
+                <option value="https://api.open-meteo.com/v1/forecast?latitude=25.79&longitude=-80.13&current=temperature_2m,rain,snowfall,cloud_cover">Miami</option>
+                <option value="https://api.open-meteo.com/v1/forecast?latitude=46.80&longitude=-71.21&current=temperature_2m,rain,snowfall,cloud_cover">Quebec</option>
+                <option value="https://api.open-meteo.com/v1/forecast?latitude=22.29&longitude=114.15&current=temperature_2m,rain,snowfall,cloud_cover">Hongkong</option>
+                <option value="https://api.open-meteo.com/v1/forecast?latitude=-34.65&longitude=-58.39&current=temperature_2m,rain,snowfall,cloud_cover">Buenos Aires</option>
+            </select>
+        </div>
     </div>
 
-    <div id="weatherBlock">
-        <h1>Aktuelles Wetter weltweit</h1>
-        <label for="citySelect">Wähle eine Stadt:</label>
-        <select id="citySelect">
-            <option value="https://api.open-meteo.com/v1/forecast?latitude=46.948&longitude=7.447&current=temperature_2m,rain,snowfall,cloud_cover">Bern</option>
-            <option value="https://api.open-meteo.com/v1/forecast?latitude=25.79&longitude=-80.13&current=temperature_2m,rain,snowfall,cloud_cover">Miami</option>
-            <option value="https://api.open-meteo.com/v1/forecast?latitude=46.80&longitude=-71.21&current=temperature_2m,rain,snowfall,cloud_cover">Quebec</option>
-            <option value="https://api.open-meteo.com/v1/forecast?latitude=22.29&longitude=114.15&current=temperature_2m,rain,snowfall,cloud_cover">Hongkong</option>
-            <option value="https://api.open-meteo.com/v1/forecast?latitude=-34.65&longitude=-58.39&current=temperature_2m,rain,snowfall,cloud_cover">Buenos Aires</option>
-        </select>
-        <div id="weatherData"></div>
+
+    <div id="Empfehlungssatz">
+        <h3>Für dein Wetter empfehlen wir dir den folgenden Cocktail:</h3>
     </div>
+
+
 
     <div id="cocktailBlock" style="background-image: url('img/mojito.jpg');">
-        <div id="cocktailImage">
-            <h2 id="cocktailTitle">Cocktailname</h2>
-        </div>
-        <div id="cocktailRecipe">
-            <h3>Rezept:</h3>
-            <p id="recipeDetails">Hier steht das Rezept...</p>
-        </div>
+        <div id="cocktailTitleContainer">
+        <h2 id="cocktailTitle">Cocktailname</h2>
+    </div>
+    <div id="cocktailRecipeContainer">
+        <p id="recipeDetails">Hier steht das Rezept...</p>
+    </div>
     </div>
 
     <footer>

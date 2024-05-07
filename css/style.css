@@ -43,29 +43,122 @@ nav a:hover {
 
 #cocktailBlock {
     width: 100%;
-    height: 75vh; /* Vollständige Höhe des Bildschirms */
-    background-size: cover;
-    background-position: center -2cm; /* Verschiebt das Bild nach unten */
-    position: relative;
+    background-color: #222; /* Dunkler Hintergrund für Cocktailblock */
+    padding: 20px;
+    text-align: center;
+
 }
 
 
-#cocktailImage {
-    position: absolute;
-    top: 0;
-    width: 100%;
+#cocktailTitleContainer, #cocktailRecipeContainer {
+    width: 30%; /* Konsistente Breite für beide Container */
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund für den Titel */
+    text-align: center;
+    margin-top: 1rem;
+    margin-left: 105%; /* Schiebt die Elemente weiter nach rechts */
+    transform: translateX(-75%); /* Verschiebt nach links, um die Mitte zu zentrieren */
 }
 
 #cocktailTitle {
     font-size: 2em;
     font-weight: bold;
+    margin: 0; /* Entfernt zusätzliche Abstände */
+    text-align: center; /* Zentriert die Schrift im Titel */
 }
 
 #cocktailRecipe {
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7); /* Halbtransparenter Hintergrund für das Rezept */
-    margin-top: 250px; /* Abstand entsprechend der Höhe des Cocktailbildes */
+    font-size: 1.2em; /* Passe die Schriftgröße für das Rezept an */
+    margin: 0;
+    text-align: center; /* Zentriert die Schrift im Rezept */
 }
 
+
+
+#weatherContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #222; /* Dunkler Hintergrund */
+    padding: 20px;
+    align-items: center;
+}
+
+.weather-column {
+    position: relative;
+    display: flex; /* Verwende flexibles Layout */
+    flex-direction: column; /* Stapelt die Elemente vertikal */
+    justify-content: center; /* Zentriert vertikal innerhalb der Spalte */
+    align-items: center; /* Zentriert horizontal innerhalb der Spalte */
+    flex: 1; /* Jede Spalte nimmt den gleichen Raum ein */
+    margin: 10px;
+    text-align: center;
+}
+
+#weatherIconContainer img {
+    width: 160px;
+    height: 160px;
+    margin: auto;
+}
+
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+
+
+
+.city-select-label {
+    font-size: 1.5rem; /* Beispielhafte Schriftgröße */
+    font-weight: normal; /* Macht den Text fett */
+    color: #ffffff; /* Ändern Sie dies nach Bedarf */
+    margin-bottom: 10px; /* Abstand nach unten */
+}
+
+
+
+/* Stil für das Dropdown-Menü */
+#citySelect {
+    width: 200px; /* Setzt die Breite des Dropdowns */
+    padding: 8px; /* Innenabstand für mehr Klickfläche */
+    font-size: 16px; /* Schriftgröße des Textes */
+    background-color: #333; /* Hintergrundfarbe */
+    color: #ffffff; /* Schriftfarbe */
+    border: 2px solid #555; /* Rahmenfarbe und -stärke */
+    border-radius: 4px; /* Runde Ecken */
+    margin: 10px auto; /* Zentriert das Dropdown-Menü horizontal */
+    display: block; /* Stellt sicher, dass es sich als Block-Element verhält */
+}
+
+/* Stil für die Dropdown-Pfeile (optional) */
+#citySelect::after {
+    content: "▼"; /* Ersetzt den Standardpfeil */
+    color: #ffffff; /* Farbe des Pfeils */
+    padding-left: 10px;
+}
+
+
+
+/* Stil für einzelne Optionen im Dropdown-Menü */
+#citySelect option {
+    background-color: #444; /* Hintergrundfarbe für die Optionen */
+    color: #ffffff; /* Textfarbe der Optionen */
+    padding: 5px; /* Abstand in den Optionen */
+}
+
+
+#Empfehlungssatz {
+    padding: 2rem;
+    text-align: center;
+    background-color: #86751d;
+    width: 100%;
+}

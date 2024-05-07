@@ -1,8 +1,21 @@
+// Zuordnung von URL zu Stadtname für die Anzeige
+const cityNames = {
+    'https://api.open-meteo.com/v1/forecast?latitude=46.948&longitude=7.447&current=temperature_2m,rain,snowfall,cloud_cover': 'Bern',
+    'https://api.open-meteo.com/v1/forecast?latitude=25.79&longitude=-80.13&current=temperature_2m,rain,snowfall,cloud_cover': 'Miami',
+    'https://api.open-meteo.com/v1/forecast?latitude=46.80&longitude=-71.21&current=temperature_2m,rain,snowfall,cloud_cover': 'Quebec',
+    'https://api.open-meteo.com/v1/forecast?latitude=22.29&longitude=114.15&current=temperature_2m,rain,snowfall,cloud_cover': 'Hongkong',
+    'https://api.open-meteo.com/v1/forecast?latitude=-34.65&longitude=-58.39&current=temperature_2m,rain,snowfall,cloud_cover': 'Buenos Aires'
+};
+
+
+
+
 const cocktailTitle = document.querySelector('#cocktailTitle');
 const recipeDetails = document.querySelector('#recipeDetails');
 
-// Zugriff auf die Wetterdaten und das Dropdown-Menü
+// Zugriff auf die Wetterdaten, das Wetter-Icon und das Dropdown-Menü
 const weatherDataDiv = document.querySelector('#weatherData');
+const weatherIconImg = document.querySelector('#weatherIcon');
 const citySelect = document.querySelector('#citySelect');
 
 // Event-Listener für die Dropdown-Auswahl
@@ -17,8 +30,8 @@ updateWeather(citySelect.value);
 async function updateWeather(url) {
     let weatherData = await fetchData(url);
 
-    // Extrahiere die Wetterdaten
-    let currentWeather = weatherData.current; // Je nach API-Pfad anpassen
+    // Extrahiere die Wetterdaten (Passe den korrekten Pfad in den Daten an)
+    let currentWeather = weatherData.current;
     let temperature = currentWeather.temperature_2m || 0;
     let rain = currentWeather.rain || 0; // Niederschlag in mm
     let snowfall = currentWeather.snowfall || 0; // Schneefall in mm
@@ -26,39 +39,43 @@ async function updateWeather(url) {
 
     // Passendes Wetter-Icon auswählen
     let weatherIcon = '';
-    let selectedCocktail = {};
-
     if (snowfall !== 0 && rain === 0) {
         weatherIcon = 'img/wi-snow.svg';
-        selectedCocktail = getRandomItem(snowyCocktails);
     } else if (rain !== 0) {
         weatherIcon = 'img/wi-rain.svg';
-        selectedCocktail = getRandomItem(rainyCocktails);
     } else if (cloudCover > 30) {
         weatherIcon = 'img/wi-cloudy.svg';
-        selectedCocktail = getRandomItem(cloudyCocktails);
     } else if (rain === 0 && snowfall === 0 && cloudCover <= 30) {
         weatherIcon = 'img/wi-day-sunny.svg';
-        selectedCocktail = getRandomItem(sunnyCocktails);
     }
 
-    // Ausgabe des Wetterberichts mit passendem Icon
+    // Setze das Wetter-Icon im entsprechenden img-Element
+    weatherIconImg.src = weatherIcon;
+
+    // Ausgabe der Wetterdaten
     weatherDataDiv.innerHTML = `
-        <div style="display: flex; align-items: center;">
-            <img src="${weatherIcon}" alt="Wetter-Icon" style="width: 160px; height: 160px;">
-            <div style="margin-left: 20px;">
-                <p>Temperatur: ${temperature}°C</p>
-                <p>Regen: ${rain} mm</p>
-                <p>Schneefall: ${snowfall} mm</p>
-                <p>Wolkenbedeckung: ${cloudCover}%</p>
-            </div>
-        </div>
+        <h1>Wetter in ${cityNames[url]}</h1>
+        <h3>Temperatur: ${temperature}°C</h3>
+        <h3>Regen: ${rain} mm</h3>
+        <h3>Schneefall: ${snowfall} mm</h3>
+        <h3>Wolkenbedeckung: ${cloudCover}%</h3>
     `;
 
     // Passenden Cocktail anzeigen
+    let selectedCocktail = {};
+    if (snowfall !== 0 && rain === 0) {
+        selectedCocktail = getRandomItem(snowyCocktails);
+    } else if (rain !== 0) {
+        selectedCocktail = getRandomItem(rainyCocktails);
+    } else if (cloudCover > 30) {
+        selectedCocktail = getRandomItem(cloudyCocktails);
+    } else if (rain === 0 && snowfall === 0 && cloudCover <= 30) {
+        selectedCocktail = getRandomItem(sunnyCocktails);
+    }
+
     cocktailTitle.textContent = selectedCocktail.name;
     recipeDetails.innerHTML = `
-        <p><strong>Beschreibung:</strong> ${selectedCocktail.description}</p>
+        <p><strong>Beschreibung:<br></strong> ${selectedCocktail.description}</p><br>
         <p><strong>Rezept:</strong><br>${selectedCocktail.recipe}</p>
     `;
 
