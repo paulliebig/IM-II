@@ -8,10 +8,10 @@
 body {
     font-family: "Inter-Regular", Helvetica, sans-serif;
     background-color: #333; /* Dunkler Hintergrund für das gesamte Design */
-    color: #fff; /* Weiße Textfarbe für besseren Kontrast */
+    color: lightgray; /* Textfarbe für besseren Kontrast */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Zentrieren der Inhalte */
+    align-items: center; /* Zentriert die Inhalte */
 }
 
 nav {
@@ -34,62 +34,24 @@ nav a:hover {
     text-decoration: underline;
 }
 
-#weatherBlock {
-    width: 100%;
-    background-color: #222; /* Dunkler Hintergrund für Wetterblock */
-    padding: 20px;
-    text-align: center;
-}
-
-#cocktailBlock {
-    width: 100%;
-    background-color: #222; /* Dunkler Hintergrund für Cocktailblock */
-    padding: 20px;
-    text-align: center;
-
-}
-
-
-#cocktailTitleContainer, #cocktailRecipeContainer {
-    width: 30%; /* Konsistente Breite für beide Container */
-    padding: 20px;
-    text-align: center;
-    margin-top: 1rem;
-    margin-left: 105%; /* Schiebt die Elemente weiter nach rechts */
-    transform: translateX(-75%); /* Verschiebt nach links, um die Mitte zu zentrieren */
-}
-
-#cocktailTitle {
-    font-size: 2em;
-    font-weight: bold;
-    margin: 0; /* Entfernt zusätzliche Abstände */
-    text-align: center; /* Zentriert die Schrift im Titel */
-}
-
-#cocktailRecipe {
-    font-size: 1.2em; /* Passe die Schriftgröße für das Rezept an */
-    margin: 0;
-    text-align: center; /* Zentriert die Schrift im Rezept */
-}
-
-
-
 #weatherContainer {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 80%;
     background-color: #222; /* Dunkler Hintergrund */
     padding: 20px;
     align-items: center;
+    border-radius: 10px;
+    margin-top: 2rem;
 }
 
 .weather-column {
     position: relative;
-    display: flex; /* Verwende flexibles Layout */
+    display: flex;
     flex-direction: column; /* Stapelt die Elemente vertikal */
-    justify-content: center; /* Zentriert vertikal innerhalb der Spalte */
-    align-items: center; /* Zentriert horizontal innerhalb der Spalte */
-    flex: 1; /* Jede Spalte nimmt den gleichen Raum ein */
+    justify-content: center; /* Zentriert vertikal */
+    align-items: center; /* Zentriert horizontal */
+    flex: 1;
     margin: 10px;
     text-align: center;
 }
@@ -100,13 +62,11 @@ nav a:hover {
     margin: auto;
 }
 
-
 h1 {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
 }
-
 
 h3 {
     font-size: 1rem;
@@ -114,51 +74,145 @@ h3 {
     margin-bottom: 5px;
 }
 
-
-
-
 .city-select-label {
-    font-size: 1.5rem; /* Beispielhafte Schriftgröße */
-    font-weight: normal; /* Macht den Text fett */
-    color: #ffffff; /* Ändern Sie dies nach Bedarf */
-    margin-bottom: 10px; /* Abstand nach unten */
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #ffffff;
+    margin-bottom: 10px;
 }
-
-
 
 /* Stil für das Dropdown-Menü */
 #citySelect {
-    width: 200px; /* Setzt die Breite des Dropdowns */
-    padding: 8px; /* Innenabstand für mehr Klickfläche */
-    font-size: 16px; /* Schriftgröße des Textes */
+    width: 200px; /* Breite des Dropdowns */
+    padding: 8px;
+    font-size: 16px;
     background-color: #333; /* Hintergrundfarbe */
     color: #ffffff; /* Schriftfarbe */
-    border: 2px solid #555; /* Rahmenfarbe und -stärke */
+    border: 2px solid #555;
     border-radius: 4px; /* Runde Ecken */
-    margin: 10px auto; /* Zentriert das Dropdown-Menü horizontal */
-    display: block; /* Stellt sicher, dass es sich als Block-Element verhält */
+    margin: 10px auto;
+    display: block;
 }
 
-/* Stil für die Dropdown-Pfeile (optional) */
 #citySelect::after {
     content: "▼"; /* Ersetzt den Standardpfeil */
-    color: #ffffff; /* Farbe des Pfeils */
+    color: #ffffff;
     padding-left: 10px;
 }
 
-
-
-/* Stil für einzelne Optionen im Dropdown-Menü */
 #citySelect option {
-    background-color: #444; /* Hintergrundfarbe für die Optionen */
+    background-color: #444; /* Hintergrundfarbe für Optionen */
     color: #ffffff; /* Textfarbe der Optionen */
-    padding: 5px; /* Abstand in den Optionen */
+    padding: 5px;
 }
-
 
 #Empfehlungssatz {
     padding: 2rem;
     text-align: center;
     background-color: #86751d;
-    width: 100%;
+    width: 80%;
+    margin-top: 2rem;
+    border-radius: 10px;
+    color: white;
 }
+
+/* Lege eine feste Höhe für den Cocktail-Block fest */
+#cocktailBlock {
+    width: 80%;
+    background-color: #222;
+    padding: 20px;
+    margin: 2rem auto;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    height: 580px; /* Feste Höhe, passe nach Bedarf an */
+}
+
+
+#cocktailTitleContainer, #cocktailRecipeContainer {
+    width: 30%; /* Breitere Container für Rezepte und Titel */
+    padding: 20px;
+    text-align: center;
+    margin-left: 62%;
+}
+
+#cocktailTitleContainer {
+    margin-top: 2rem;
+}
+
+#cocktailRecipeContainer {
+    margin-bottom: 2rem;
+}
+
+#cocktailTitle {
+    font-size: 2em;
+    font-weight: bold;
+    color: lightgrey;
+}
+
+#recipeDetails {
+    color: lightgray;
+    font-family: "Baguette Script", cursive;
+}
+
+/* Stil für den Button zum Ändern des Cocktails */
+#changeCocktail {
+    width: 200px;
+    padding: 8px;
+    font-size: 16px;
+    background-color: #86751d;
+    color: #ffffff;
+    border: 2px solid #555;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    position: absolute;
+    bottom: -10%; /* Abstand vom unteren Rand des Containers */
+    left: 71%; /* Zentriert horizontal */
+    transform: translateX(-50%); /* Verschiebt den Button zur Mitte */
+}
+
+#changeCocktail:hover {
+    background-color: #444; /* Ändert die Hintergrundfarbe beim Hover */
+    border-color: #86751d; /* Rahmenfarbe beim Hover */
+}
+
+/* Standardmäßig unsichtbar */
+.hidden {
+    opacity: 0;
+}
+
+/* Fade-in-Animationen */
+@keyframes fadeInBackground {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in-background {
+    animation: fadeInBackground 0.5s ease-in-out;
+    opacity: 1;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeInText 1.5s ease-in-out;
+    opacity: 1;
+}
+
+
+
+
+

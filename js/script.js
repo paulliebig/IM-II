@@ -18,6 +18,8 @@ const weatherDataDiv = document.querySelector('#weatherData');
 const weatherIconImg = document.querySelector('#weatherIcon');
 const citySelect = document.querySelector('#citySelect');
 
+
+
 // Event-Listener für die Dropdown-Auswahl
 citySelect.addEventListener('change', function () {
     const selectedUrl = this.value;
@@ -221,6 +223,10 @@ const cloudyCocktails = [
     }
 ];
 
+
+
+
+
 async function fetchData(url) {
     try {
         let response = await fetch(url);
@@ -229,4 +235,185 @@ async function fetchData(url) {
     } catch (error) {
         console.log(error);
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Event-Listener für den Button zum Ändern des Cocktails
+document.getElementById('changeCocktail').addEventListener('click', function() {
+    // Beispiel: Funktion, die basierend auf dem aktuellen Wetter einen neuen Cocktail lädt
+    const currentWeather = getCurrentWeather(); // Funktion, die das aktuelle Wetter abruft (muss definiert sein)
+    const newCocktail = getCocktailByWeather(currentWeather); // Funktion, die einen Cocktail basierend auf dem Wetter vorschlägt
+    updateCocktailDisplay(newCocktail); // Funktion, die die Cocktail-Anzeige aktualisiert
+});
+
+
+function getCocktailByWeather(weather) {
+    const cocktails = {
+        sunny: ["Margarita", "Mojito", "Piña Colada", "Daiquiri", "Mai Tai"],
+        rainy: ["Irish Coffee", "Hot Toddy", "Dark 'n' Stormy", "Amaretto Sour", "Rusty Nail"],
+        cloudy: ["Whisky Sour", "Old Fashioned", "Moscow Mule", "Cosmopolitan", "Negroni"],
+        snowfall: ["Eggnog", "Mulled Wine", "Hot Buttered Rum", "Tom & Jerry", "Irish Coffee"]
+    };
+    const randomIndex = Math.floor(Math.random() * cocktails[weather].length);
+    return cocktails[weather][randomIndex];
+}
+
+function getCurrentWeather() {
+    // Diese Funktion müsste das aktuelle Wetter abrufen, z.B. aus einem Wetter-API-Aufruf
+    // Hier als Platzhalter ein statischer Wert
+    return 'sunny'; // Der tatsächliche Wert sollte dynamisch basierend auf echten Daten gesetzt werden
+}
+
+function updateCocktailDisplay(cocktailName) {
+    document.getElementById('cocktailTitle').textContent = cocktailName;
+    // Hier könnte auch das Rezept aktualisiert werden, falls vorhanden
+}
+
+
+
+function getCocktailByWeather(weather) {
+    const cocktailCategories = {
+        sunny: sunnyCocktails,
+        rainy: rainyCocktails,
+        cloudy: cloudyCocktails,
+        snowfall: snowyCocktails
+    };
+
+    const categoryCocktails = cocktailCategories[weather];
+    const randomIndex = Math.floor(Math.random() * categoryCocktails.length);
+    return categoryCocktails[randomIndex];
+}
+
+function updateCocktailDisplay(cocktail) {
+    // Aktualisiere den Titel, das Rezept und das Bild
+    cocktailTitle.textContent = cocktail.name;
+    recipeDetails.innerHTML = `
+        <p><strong>Beschreibung:<br></strong> ${cocktail.description}</p><br>
+        <p><strong>Rezept:</strong><br>${cocktail.recipe}</p>
+    `;
+    let cocktailBlock = document.querySelector('#cocktailBlock');
+    cocktailBlock.style.backgroundImage = `url('${cocktail.image}')`;
+}
+
+// Aktualisiere die Event-Listener-Funktion
+document.getElementById('changeCocktail').addEventListener('click', function() {
+    // Hier wird die Funktion `getCurrentWeather` verwendet, um die aktuelle Wetterkategorie zu bestimmen.
+    const currentWeather = getCurrentWeather(); // Diese Funktion muss das aktuelle Wetter bestimmen
+    const newCocktail = getCocktailByWeather(currentWeather);
+    updateCocktailDisplay(newCocktail);
+});
+
+// Globale Variable für die aktuelle Wetterkategorie
+let currentWeatherCategory = '';
+
+async function updateWeather(url) {
+    let weatherData = await fetchData(url);
+
+    // Extrahiere die Wetterdaten (Passe den korrekten Pfad in den Daten an)
+    let currentWeather = weatherData.current;
+    let temperature = currentWeather.temperature_2m || 0;
+    let rain = currentWeather.rain || 0; // Niederschlag in mm
+    let snowfall = currentWeather.snowfall || 0; // Schneefall in mm
+    let cloudCover = currentWeather.cloud_cover || 0; // Wolkenbedeckung in %
+
+    // Passendes Wetter-Icon auswählen
+    let weatherIcon = '';
+    if (snowfall !== 0 && rain === 0) {
+        weatherIcon = 'img/wi-snow.svg';
+        currentWeatherCategory = 'snowfall';
+    } else if (rain !== 0) {
+        weatherIcon = 'img/wi-rain.svg';
+        currentWeatherCategory = 'rainy';
+    } else if (cloudCover > 30) {
+        weatherIcon = 'img/wi-cloudy.svg';
+        currentWeatherCategory = 'cloudy';
+    } else if (rain === 0 && snowfall === 0 && cloudCover <= 30) {
+        weatherIcon = 'img/wi-day-sunny.svg';
+        currentWeatherCategory = 'sunny';
+    }
+
+    // Setze das Wetter-Icon im entsprechenden img-Element
+    weatherIconImg.src = weatherIcon;
+
+    // Ausgabe der Wetterdaten
+    weatherDataDiv.innerHTML = `
+        <h1>Wetter in ${cityNames[url]}</h1>
+        <h3>Temperatur: ${temperature}°C</h3>
+        <h3>Regen: ${rain} mm</h3>
+        <h3>Schneefall: ${snowfall} mm</h3>
+        <h3>Wolkenbedeckung: ${cloudCover}%</h3>
+    `;
+
+    // Passenden Cocktail anzeigen
+    const selectedCocktail = getCocktailByWeather(currentWeatherCategory);
+    updateCocktailDisplay(selectedCocktail);
+}
+
+function getCurrentWeather() {
+    // Gibt die aktuelle Wetterkategorie aus der globalen Variable zurück
+    return currentWeatherCategory;
+}
+
+document.getElementById('changeCocktail').addEventListener('click', function() {
+    const currentWeather = getCurrentWeather(); // Bestimmt die aktuelle Wetterkategorie
+    const newCocktail = getCocktailByWeather(currentWeather); // Wählt einen Cocktail anhand der Kategorie aus
+    updateCocktailDisplay(newCocktail); // Aktualisiert die Cocktail-Anzeige
+});
+
+
+
+
+
+
+
+
+
+
+window.onload = function() {
+    // Füge der Body-Klasse "fade-in" hinzu, sobald die Seite vollständig geladen ist
+    document.body.classList.add('fade-in');
+};
+
+
+function updateCocktailDisplay(cocktail) {
+    const cocktailTitle = document.querySelector('#cocktailTitle');
+    const recipeDetails = document.querySelector('#recipeDetails');
+    const cocktailBlock = document.querySelector('#cocktailBlock');
+
+    // Entferne alte Klassen
+    cocktailTitle.classList.remove('fade-in', 'hidden');
+    recipeDetails.classList.remove('fade-in', 'hidden');
+    cocktailBlock.classList.remove('fade-in-background', 'hidden');
+
+    // Aktualisiere den Titel und das Rezept
+    cocktailTitle.textContent = cocktail.name;
+    recipeDetails.innerHTML = `
+        <p><strong>Beschreibung:<br></strong> ${cocktail.description}</p><br>
+        <p><strong>Rezept:</strong><br>${cocktail.recipe}</p>
+    `;
+
+    // Setze das Hintergrundbild für den Cocktail-Block
+    cocktailBlock.style.backgroundImage = `url('${cocktail.image}')`;
+
+    // Füge die Fade-in-Klassen hinzu, um die Animationen zu starten
+    setTimeout(() => {
+        cocktailTitle.classList.add('fade-in');
+        recipeDetails.classList.add('fade-in');
+        cocktailBlock.classList.add('fade-in-background');
+    }, 10);
 }

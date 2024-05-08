@@ -5,9 +5,7 @@
     <title>Webseite mit Wetter und Cocktail</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
     <div id="weatherContainer">
         <div class="weather-column" id="weatherIconContainer">
             <img id="weatherIcon" src="" alt="Wetter-Icon" style="width: 160px; height: 160px;">
@@ -27,20 +25,20 @@
         </div>
     </div>
 
-
     <div id="Empfehlungssatz">
         <h3>Für dein Wetter empfehlen wir dir den folgenden Cocktail:</h3>
     </div>
 
-
-
-    <div id="cocktailBlock" style="background-image: url('img/mojito.jpg');">
+    <div id="cocktailBlock" class="hidden">
         <div id="cocktailTitleContainer">
-        <h2 id="cocktailTitle">Cocktailname</h2>
-    </div>
-    <div id="cocktailRecipeContainer">
-        <p id="recipeDetails">Hier steht das Rezept...</p>
-    </div>
+            <h2 id="cocktailTitle" class="hidden">Cocktailname</h2>
+        </div>
+        <div id="cocktailRecipeContainer">
+            <p id="recipeDetails" class="hidden">Hier steht das Rezept...</p>
+        </div>
+        <div id="cocktailRecipeContainer">
+            <button id="changeCocktail">Anderer Cocktail!</button>
+        </div>
     </div>
 
     <footer>
