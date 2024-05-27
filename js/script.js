@@ -7,9 +7,6 @@ const cityNames = {
     'https://api.open-meteo.com/v1/forecast?latitude=-34.65&longitude=-58.39&current=temperature_2m,rain,snowfall,cloud_cover': 'Buenos Aires'
 };
 
-
-
-
 const cocktailTitle = document.querySelector('#cocktailTitle');
 const recipeDetails = document.querySelector('#recipeDetails');
 
@@ -17,8 +14,6 @@ const recipeDetails = document.querySelector('#recipeDetails');
 const weatherDataDiv = document.querySelector('#weatherData');
 const weatherIconImg = document.querySelector('#weatherIcon');
 const citySelect = document.querySelector('#citySelect');
-
-
 
 // Event-Listener für die Dropdown-Auswahl
 citySelect.addEventListener('change', function () {
@@ -43,12 +38,16 @@ async function updateWeather(url) {
     let weatherIcon = '';
     if (snowfall !== 0 && rain === 0) {
         weatherIcon = 'img/wi-snow.svg';
+        currentWeatherCategory = 'snowfall';
     } else if (rain !== 0) {
         weatherIcon = 'img/wi-rain.svg';
+        currentWeatherCategory = 'rainy';
     } else if (cloudCover > 30) {
         weatherIcon = 'img/wi-cloudy.svg';
+        currentWeatherCategory = 'cloudy';
     } else if (rain === 0 && snowfall === 0 && cloudCover <= 30) {
         weatherIcon = 'img/wi-day-sunny.svg';
+        currentWeatherCategory = 'sunny';
     }
 
     // Setze das Wetter-Icon im entsprechenden img-Element
@@ -64,25 +63,8 @@ async function updateWeather(url) {
     `;
 
     // Passenden Cocktail anzeigen
-    let selectedCocktail = {};
-    if (snowfall !== 0 && rain === 0) {
-        selectedCocktail = getRandomItem(snowyCocktails);
-    } else if (rain !== 0) {
-        selectedCocktail = getRandomItem(rainyCocktails);
-    } else if (cloudCover > 30) {
-        selectedCocktail = getRandomItem(cloudyCocktails);
-    } else if (rain === 0 && snowfall === 0 && cloudCover <= 30) {
-        selectedCocktail = getRandomItem(sunnyCocktails);
-    }
-
-    cocktailTitle.textContent = selectedCocktail.name;
-    recipeDetails.innerHTML = `
-        <p><strong>Beschreibung:<br></strong> ${selectedCocktail.description}</p><br>
-        <p><strong>Rezept:</strong><br>${selectedCocktail.recipe}</p>
-    `;
-
-    let cocktailBlock = document.querySelector('#cocktailBlock');
-    cocktailBlock.style.backgroundImage = `url('${selectedCocktail.image}')`;
+    const selectedCocktail = getCocktailByWeather(currentWeatherCategory);
+    updateCocktailDisplay(selectedCocktail);
 }
 
 function getRandomItem(array) {
@@ -223,10 +205,6 @@ const cloudyCocktails = [
     }
 ];
 
-
-
-
-
 async function fetchData(url) {
     try {
         let response = await fetch(url);
@@ -237,22 +215,6 @@ async function fetchData(url) {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Event-Listener für den Button zum Ändern des Cocktails
 document.getElementById('changeCocktail').addEventListener('click', function() {
     // Beispiel: Funktion, die basierend auf dem aktuellen Wetter einen neuen Cocktail lädt
@@ -260,31 +222,6 @@ document.getElementById('changeCocktail').addEventListener('click', function() {
     const newCocktail = getCocktailByWeather(currentWeather); // Funktion, die einen Cocktail basierend auf dem Wetter vorschlägt
     updateCocktailDisplay(newCocktail); // Funktion, die die Cocktail-Anzeige aktualisiert
 });
-
-
-function getCocktailByWeather(weather) {
-    const cocktails = {
-        sunny: ["Margarita", "Mojito", "Piña Colada", "Daiquiri", "Mai Tai"],
-        rainy: ["Irish Coffee", "Hot Toddy", "Dark 'n' Stormy", "Amaretto Sour", "Rusty Nail"],
-        cloudy: ["Whisky Sour", "Old Fashioned", "Moscow Mule", "Cosmopolitan", "Negroni"],
-        snowfall: ["Eggnog", "Mulled Wine", "Hot Buttered Rum", "Tom & Jerry", "Irish Coffee"]
-    };
-    const randomIndex = Math.floor(Math.random() * cocktails[weather].length);
-    return cocktails[weather][randomIndex];
-}
-
-function getCurrentWeather() {
-    // Diese Funktion müsste das aktuelle Wetter abrufen, z.B. aus einem Wetter-API-Aufruf
-    // Hier als Platzhalter ein statischer Wert
-    return 'sunny'; // Der tatsächliche Wert sollte dynamisch basierend auf echten Daten gesetzt werden
-}
-
-function updateCocktailDisplay(cocktailName) {
-    document.getElementById('cocktailTitle').textContent = cocktailName;
-    // Hier könnte auch das Rezept aktualisiert werden, falls vorhanden
-}
-
-
 
 function getCocktailByWeather(weather) {
     const cocktailCategories = {
@@ -375,20 +312,10 @@ document.getElementById('changeCocktail').addEventListener('click', function() {
     updateCocktailDisplay(newCocktail); // Aktualisiert die Cocktail-Anzeige
 });
 
-
-
-
-
-
-
-
-
-
 window.onload = function() {
     // Füge der Body-Klasse "fade-in" hinzu, sobald die Seite vollständig geladen ist
     document.body.classList.add('fade-in');
 };
-
 
 function updateCocktailDisplay(cocktail) {
     const cocktailTitle = document.querySelector('#cocktailTitle');
