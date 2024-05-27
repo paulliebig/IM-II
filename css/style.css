@@ -177,6 +177,10 @@ h3 {
     margin-bottom: 2rem;
 }
 
+#cocktailButtonContainer {
+    padding-top: 50px;
+}
+
 /* Stil für den Cocktail-Titel */
 #cocktailTitle {
     font-size: 2em;
@@ -202,6 +206,7 @@ h3 {
     cursor: pointer;
     text-align: center;
     margin-top: 20px; /* Verschiebt den Button nach unten */
+    margin: auto;
 }
 
 /* Standardmäßig unsichtbar */
