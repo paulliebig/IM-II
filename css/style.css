@@ -34,6 +34,43 @@ nav a:hover {
     text-decoration: underline;
 }
 
+/* Stil für die "Über uns" Seite */
+#teamContainer {
+    width: 80%;
+    background-color: #222; /* Dunkler Hintergrund */
+    padding: 20px;
+    margin: 2rem auto;
+    text-align: center;
+    border-radius: 10px;
+    color: lightgray;
+}
+
+.team-member {
+    margin-bottom: 2rem;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 10px;
+    background-color: #333;
+}
+
+.team-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.team-member h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.team-member p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Restliche vorhandene CSS */
 #weatherContainer {
     display: flex;
     justify-content: space-between;
@@ -129,7 +166,6 @@ h3 {
     height: 580px; /* Feste Höhe, passe nach Bedarf an */
 }
 
-
 #cocktailTitleContainer, #cocktailRecipeContainer {
     width: 30%; /* Breitere Container für Rezepte und Titel */
     padding: 20px;
@@ -170,49 +206,5 @@ h3 {
     position: absolute;
     bottom: -10%; /* Abstand vom unteren Rand des Containers */
     left: 71%; /* Zentriert horizontal */
-    transform: translateX(-50%); /* Verschiebt den Button zur Mitte */
+    transform: translateX(-50%); /* Verschiebt den Button zur Mi*/
 }
-
-#changeCocktail:hover {
-    background-color: #444; /* Ändert die Hintergrundfarbe beim Hover */
-    border-color: #86751d; /* Rahmenfarbe beim Hover */
-}
-
-/* Standardmäßig unsichtbar */
-.hidden {
-    opacity: 0;
-}
-
-/* Fade-in-Animationen */
-@keyframes fadeInBackground {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.fade-in-background {
-    animation: fadeInBackground 0.5s ease-in-out;
-    opacity: 1;
-}
-
-@keyframes fadeInText {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.fade-in {
-    animation: fadeInText 1.5s ease-in-out;
-    opacity: 1;
-}
-
-
-
-
-
