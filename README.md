@@ -27,3 +27,8 @@ Benutzte Ressourcen
     Browser-Entwicklertools: Für das Debugging und die Optimierung des Codes.
     MDN Web Docs: Umfassende Dokumentation und Tutorials für Webtechnologien.
     ChatGPT: Diverse Optmimierungen und Problemlösungen.
+
+Responsive Design
+
+    Es wurden die Grössen Desktop, Tablet und Mobile erstellt. Desktop und Tablet funktioniert einwandfrei.
+    Bei der Mobile Ansicht muss das ganze Chrome Fenster zusammengeschoben werden, da es bei der Responsive Vorschau einen Anzeigefehler gibt. (wie auch schon mit Nick besprochen)

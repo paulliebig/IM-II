@@ -247,15 +247,6 @@ h3 {
 
 
 
-
-
-
-
-
-
-
-
-
 /* Tablet: max width = 768px */
 @media (max-width: 768px) {
 
@@ -285,16 +276,6 @@ h3 {
         margin-top: 40px; /* Verschiebt den Button weiter nach unten */
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 /* Mobile: max width = 576px */
